@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ÉDEN Work | Tranquil Haven for Creative Minds</title>
+<meta name="description" content="ÉDEN Work – a quiet co-working space for students and freelancers.">
+<link rel="icon" href="images/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+
+<!--
+  HOW TO USE
+  1. Create a folder, put this file inside as index.html
+  2. Create a sub-folder called "images" and save your photos with these names:
+       images/eden-1.jpg  (daytime main hall)
+       images/eden-2.jpg  (evening lights)
+       images/eden-3.jpg  (meeting room)
+       images/eden-4.jpg  (terrace)
+       images/logo.png    (your black ÉDEN WORK logo)
+  3. Open with Live Server in VS Code.
+  4. Admin: click the small ● button at the very bottom of the page, password 2424.
+-->
+
+<style>
+:root{
+  --green:#2f7d4f;
+  --green-dark:#1f5b38;
+  --green-soft:#e9f4ed;
+  --white:#ffffff;
+  --off:#f7faf8;
+  --ink:#1d2b24;
+  --muted:#5f6f66;
+  --orange:#ff7a1a;
+  --orange-soft:#fff0e3;
+  --radius:20px;
+  --shadow:0 10px 30px rgba(31,91,56,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:'Poppins',sans-serif;color:var(--ink);background:var(--white);line-height:1.65;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.container{width:min(1140px,92%);margin:auto}
+section{padding:90px 0}
+h1,h2,h3{font-family:'Playfair Display',serif;line-height:1.2}
+h2{font-size:clamp(1.9rem,4vw,2.7rem);color:var(--green-dark);margin-bottom:12px}
+.eyebrow{display:inline-block;font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);font-weight:600;margin-bottom:10px}
+.lead{color:var(--muted);max-width:640px;margin-bottom:40px}
+.hl{color:var(--orange);font-weight:600}
+.btn{display:inline-block;padding:14px 30px;border-radius:50px;font-weight:600;border:2px solid transparent;cursor:pointer;font-family:inherit;font-size:1rem;transition:.3s}
+.btn-orange{background:var(--orange);color:#fff;box-shadow:0 8px 20px rgba(255,122,26,.35)}
+.btn-orange:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(255,122,26,.45)}
+.btn-ghost{border-color:var(--green);color:var(--green)}
+.btn-ghost:hover{background:var(--green);color:#fff}
+
+/* NAV */
+header{position:fixed;inset:0 0 auto 0;z-index:50;background:rgba(255,255,255,.88);backdrop-filter:blur(12px);border-bottom:1px solid rgba(47,125,79,.1)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+.logo{display:flex;align-items:center}
+.logo-box{position:relative;display:block;width:118px;aspect-ratio:1800/830;overflow:hidden}
+.logo-box img{position:absolute;max-width:none;width:106.7%;left:-3.6%;top:-66.3%}
+.logo-text{display:none;font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--green-dark)}
+.logo-text span{color:var(--orange);font-family:'Poppins';font-size:.75rem;letter-spacing:.3em;margin-left:6px;font-weight:500}
+.logo.nologo .logo-box{display:none}
+.logo.nologo .logo-text{display:block}
+nav ul{display:flex;gap:28px;list-style:none}
+nav a{font-size:.92rem;font-weight:500;color:var(--ink);position:relative}
+nav a::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:2px;background:var(--orange);transition:.3s}
+nav a:hover::after{width:100%}
+.burger{display:none;background:none;border:0;font-size:1.7rem;color:var(--green-dark);cursor:pointer}
+
+/* HERO */
+.hero{padding:140px 0 80px;background:linear-gradient(135deg,var(--green-soft),#fff 60%);position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;width:480px;height:480px;border-radius:50%;background:radial-gradient(var(--orange-soft),transparent 70%);right:-120px;top:-80px}
+.hero-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:50px;align-items:center;position:relative}
+.hero h1{font-size:clamp(2.6rem,6vw,4.4rem);color:var(--green-dark)}
+.hero h1 em{color:var(--orange);font-style:normal}
+.slogan{font-family:'Caveat',cursive;font-size:1.9rem;color:var(--green);margin:14px 0 18px}
+.hero p.txt{color:var(--muted);max-width:520px;margin-bottom:30px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+.status{display:inline-flex;align-items:center;gap:8px;background:#fff;padding:8px 16px;border-radius:50px;box-shadow:var(--shadow);font-size:.85rem;font-weight:500;margin-bottom:22px}
+.dot{width:10px;height:10px;border-radius:50%;background:#bbb}
+.dot.on{background:#2ecc71;box-shadow:0 0 0 4px rgba(46,204,113,.25)}
+.dot.off{background:#e74c3c}
+.hero-img{position:relative}
+.hero-img img{border-radius:30px;box-shadow:0 25px 60px rgba(31,91,56,.25);aspect-ratio:4/3;object-fit:cover;width:100%}
+.badge{position:absolute;left:-20px;bottom:30px;background:var(--orange);color:#fff;padding:16px 22px;border-radius:18px;box-shadow:var(--shadow);text-align:center;animation:float 4s ease-in-out infinite}
+.badge b{display:block;font-size:2rem;font-family:'Playfair Display'}
+@keyframes float{50%{transform:translateY(-10px)}}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.stat{background:var(--green-soft);border-radius:var(--radius);padding:26px;text-align:center}
+.stat b{font-size:2.4rem;font-family:'Playfair Display';color:var(--green-dark);display:block}
+.stat:nth-child(1) b{color:var(--orange)}
+.stat span{font-size:.88rem;color:var(--muted)}
+
+/* AMENITIES */
+.amen{background:var(--off)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px}
+.card{background:#fff;border-radius:var(--radius);padding:30px 26px;box-shadow:var(--shadow);transition:.35s;border-bottom:4px solid transparent}
+.card:hover{transform:translateY(-8px);border-color:var(--orange)}
+.card .ic{width:58px;height:58px;border-radius:16px;background:var(--green-soft);display:grid;place-items:center;font-size:1.7rem;margin-bottom:16px}
+.card h3{font-size:1.15rem;color:var(--green-dark);margin-bottom:6px;font-family:'Poppins';font-weight:600}
+.card p{font-size:.9rem;color:var(--muted)}
+
+/* GALLERY */
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:230px;gap:16px}
+.gallery figure{position:relative;border-radius:var(--radius);overflow:hidden;background:var(--green-soft)}
+.gallery figure:nth-child(1){grid-column:span 2;grid-row:span 2}
+.gallery img{width:100%;height:100%;object-fit:cover;transition:.6s}
+.gallery figure:hover img{transform:scale(1.08)}
+.gallery figcaption{position:absolute;left:14px;bottom:14px;background:rgba(255,255,255,.92);padding:6px 14px;border-radius:30px;font-size:.82rem;font-weight:600;color:var(--green-dark)}
+
+/* DESKS */
+.desks{background:var(--green-dark);color:#fff}
+.desks h2{color:#fff}
+.desks .lead{color:#cfe6d8}
+.legend{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:30px;font-size:.85rem}
+.legend i{display:inline-block;width:14px;height:14px;border-radius:4px;margin-right:6px;vertical-align:-2px}
+.zones{display:grid;grid-template-columns:2fr 1fr;gap:22px}
+.zone{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:var(--radius);padding:24px}
+.zone h3{font-family:'Poppins';font-size:1rem;font-weight:600;margin-bottom:16px;color:#ffd7b5}
+.desk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:12px}
+.desk{background:#fff;color:var(--ink);border-radius:14px;padding:12px 6px;text-align:center;transition:.3s;border-top:5px solid var(--green)}
+.desk:hover{transform:translateY(-5px) rotate(-1.5deg)}
+.desk b{display:block;font-size:1.3rem;font-family:'Playfair Display'}
+.desk small{font-size:.72rem;color:var(--muted)}
+.desk.shared{border-color:#3aa0d8}
+.desk.meet{border-color:var(--orange);background:var(--orange-soft)}
+.desk.terr{border-color:#e7c43a}
+.zones-right{display:grid;gap:22px}
+.meet-note{margin-top:14px;font-size:.85rem;color:#ffe3cc}
+
+/* NEWS BOARD */
+.news-wrap{background:var(--white)}
+.board{position:relative;border-radius:24px;padding:46px 34px;min-height:340px;
+  background:
+   repeating-linear-gradient(92deg,rgba(0,0,0,.05) 0 2px,transparent 2px 9px),
+   repeating-linear-gradient(88deg,rgba(255,255,255,.06) 0 1px,transparent 1px 14px),
+   linear-gradient(135deg,#b07a46,#8d5b2f 55%,#a56d3a);
+  border:14px solid #6b4423;box-shadow:inset 0 0 40px rgba(0,0,0,.35),0 20px 40px rgba(0,0,0,.2)}
+.notes{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:34px 28px}
+.note{position:relative;background:#fffdf3;padding:26px 20px 20px;box-shadow:0 8px 16px rgba(0,0,0,.3);transform:rotate(var(--r,-1.5deg));transition:.3s;font-family:'Caveat',cursive}
+.note:nth-child(3n+1){--r:-2deg}
+.note:nth-child(3n+2){--r:1.6deg;background:#fff4e6}
+.note:nth-child(3n){--r:-.8deg;background:#eefaf1}
+.note:hover{transform:rotate(0) scale(1.04);z-index:2}
+.note::before{content:"";position:absolute;top:-10px;left:50%;width:22px;height:22px;margin-left:-11px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#ffb27a,var(--orange) 55%,#c24f00);box-shadow:0 4px 6px rgba(0,0,0,.4)}
+.note img{width:100%;height:150px;object-fit:cover;margin-bottom:10px;border:5px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.note h3{font-family:'Caveat',cursive;font-size:1.7rem;color:var(--green-dark);line-height:1.1;margin-bottom:4px}
+.note p{font-size:1.3rem;line-height:1.25;color:#3b3b3b;white-space:pre-line}
+.note time{display:block;margin-top:8px;font-size:1.05rem;color:var(--orange);font-weight:700}
+.note .tools{display:none;gap:8px;margin-top:10px;font-family:'Poppins';}
+.admin .note .tools{display:flex}
+.tools button{border:0;border-radius:8px;padding:5px 12px;font-size:.75rem;cursor:pointer;font-family:'Poppins';font-weight:600}
+.tools .e{background:var(--green);color:#fff}
+.tools .d{background:#e74c3c;color:#fff}
+.empty{color:#f6e3cd;font-family:'Caveat';font-size:1.8rem;text-align:center;padding:60px 0}
+.add-news{display:none;margin-top:20px}
+.admin .add-news{display:inline-block}
+
+/* RULES */
+.rules{background:var(--off)}
+.rules-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
+.rule{display:flex;gap:18px;background:#fff;padding:26px;border-radius:var(--radius);box-shadow:var(--shadow);border-left:6px solid var(--green)}
+.rule.key{border-left-color:var(--orange)}
+.rule .ic{font-size:2rem;flex:none}
+.rule h3{font-family:'Poppins';font-size:1.05rem;font-weight:600;margin-bottom:4px;color:var(--green-dark)}
+.rule p{font-size:.9rem;color:var(--muted)}
+
+/* HOURS + MASCOT */
+.hours-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.hours{background:var(--green-soft);border-radius:var(--radius);padding:34px}
+.hours .row{display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px dashed rgba(47,125,79,.3);font-weight:500}
+.hours .row:last-of-type{border:0}
+.hours .row b{color:var(--orange)}
+.mascot{text-align:center}
+.mascot svg{width:min(230px,70%);animation:float 5s ease-in-out infinite;filter:drop-shadow(0 14px 14px rgba(0,0,0,.15))}
+.mascot p{font-family:'Caveat';font-size:1.7rem;color:var(--green);margin-top:8px}
+
+/* FOOTER */
+footer{background:var(--green-dark);color:#cfe6d8;padding:50px 0 24px;text-align:center}
+footer .logo{justify-content:center;margin-bottom:6px}
+footer .logo-box{width:160px}
+footer .logo-box img{filter:invert(1);mix-blend-mode:screen}
+footer .logo-text{color:#fff}
+footer .sl{font-family:'Caveat';font-size:1.6rem;color:#ffd7b5}
+footer small{display:block;margin-top:24px;opacity:.7}
+.lock{background:none;border:0;color:rgba(255,255,255,.25);font-size:.75rem;cursor:pointer;margin-top:14px}
+.lock:hover{color:var(--orange)}
+
+/* ADMIN */
+.adminbar{display:none;position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:90;background:#222;color:#fff;padding:12px 18px;border-radius:50px;gap:10px;align-items:center;box-shadow:0 10px 30px rgba(0,0,0,.4);font-size:.85rem;flex-wrap:wrap;justify-content:center;max-width:94%}
+.admin .adminbar{display:flex}
+.adminbar button{border:0;border-radius:30px;padding:8px 16px;cursor:pointer;font-family:inherit;font-weight:600;font-size:.82rem}
+.adminbar .o{background:var(--orange);color:#fff}
+.adminbar .g{background:#444;color:#fff}
+.admin [data-edit]{outline:2px dashed rgba(255,122,26,.7);outline-offset:3px;cursor:text;min-width:20px}
+.admin [data-img]{outline:3px dashed var(--orange);outline-offset:-3px;cursor:pointer}
+.hours input[type=time]{display:none;font-family:inherit;padding:4px 8px;border-radius:8px;border:2px solid var(--orange)}
+.admin .hours input[type=time]{display:inline-block}
+.admin .hours .view{display:none}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:100;display:none;place-items:center;padding:20px}
+.modal.show{display:grid}
+.box{background:#fff;border-radius:22px;padding:30px;width:min(440px,100%);box-shadow:0 25px 60px rgba(0,0,0,.4);animation:pop .3s}
+@keyframes pop{from{transform:scale(.9);opacity:0}}
+.box h3{font-family:'Poppins';color:var(--green-dark);margin-bottom:16px}
+.box label{display:block;font-size:.8rem;font-weight:600;margin:12px 0 4px}
+.box input,.box textarea{width:100%;padding:11px 14px;border:2px solid #dfe8e2;border-radius:12px;font-family:inherit;font-size:.95rem}
+.box input:focus,.box textarea:focus{outline:0;border-color:var(--orange)}
+.box .acts{display:flex;gap:10px;justify-content:flex-end;margin-top:20px}
+.err{color:#e74c3c;font-size:.82rem;margin-top:8px;min-height:1em}
+.prev{max-height:120px;border-radius:10px;margin-top:8px}
+
+/* CONTACT */
+.contact{background:var(--green-soft)}
+.ct-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-bottom:26px}
+.ct-card{display:flex;gap:16px;align-items:center;background:#fff;border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);border-bottom:4px solid transparent;transition:.3s;color:inherit}
+a.ct-card:hover{transform:translateY(-6px);border-color:var(--orange)}
+.ct-card .ic{width:54px;height:54px;border-radius:16px;background:var(--orange-soft);display:grid;place-items:center;font-size:1.6rem;flex:none}
+.ct-card small{display:block;color:var(--muted);font-size:.74rem;text-transform:uppercase;letter-spacing:.1em}
+.ct-card b{color:var(--green-dark);font-weight:600;word-break:break-word}
+.ct-card.unset{display:none}
+.admin .ct-card.unset{display:flex;opacity:.6;border:2px dashed var(--orange)}
+.ct-empty{color:var(--muted)}
+.admin .ct-empty{display:none}
+#editContact{margin-top:6px}
+.ft-links{display:flex;gap:12px;justify-content:center;margin:18px 0 0;flex-wrap:wrap}
+.ft-links a{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.12);display:grid;place-items:center;font-size:1.2rem;transition:.3s}
+.ft-links a:hover{background:var(--orange);transform:translateY(-3px)}
+
+/* NAV BOOK BUTTON */
+nav a.navbook{background:var(--orange);color:#fff;padding:8px 20px;border-radius:30px;box-shadow:0 6px 14px rgba(255,122,26,.3)}
+nav a.navbook::after{display:none}
+
+/* EVENTS */
+.events{background:linear-gradient(180deg,var(--green-soft),#fff)}
+.prices{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;margin-bottom:40px}
+.price{background:#fff;border-radius:24px;padding:36px 28px;text-align:center;box-shadow:var(--shadow);position:relative;border:2px solid transparent;transition:.35s}
+.price:hover{transform:translateY(-8px);border-color:var(--orange)}
+.price.best{border-color:var(--orange)}
+.price.best::before{content:"Best value";position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--orange);color:#fff;font-size:.75rem;font-weight:600;padding:4px 16px;border-radius:30px}
+.dur{font-weight:600;color:var(--green-dark);font-size:1.15rem}
+.amt{font-family:'Playfair Display',serif;margin:8px 0 6px;color:var(--orange);font-size:1.3rem}
+.amt b{font-size:3.4rem}
+.price small{display:block;color:var(--muted);margin-bottom:20px;font-size:.82rem}
+.evinfo{display:grid;grid-template-columns:1.4fr 1fr;gap:30px;align-items:stretch}
+.infobox{background:#fff;border-radius:var(--radius);padding:30px;box-shadow:var(--shadow)}
+.infobox h3{font-family:'Poppins',sans-serif;font-size:1.1rem;color:var(--green-dark);margin-bottom:14px}
+.infobox ul{list-style:none;display:grid;gap:12px;font-size:.92rem;color:var(--muted)}
+.infobox.cta{background:var(--green-dark);text-align:center;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.infobox.cta h3{color:#fff;font-family:'Playfair Display',serif;font-size:1.6rem}
+.infobox.cta p{color:#cfe6d8;font-size:.92rem;margin-bottom:22px}
+
+/* BOOKING FORM */
+.modal .box{max-height:92vh;overflow:auto}
+.box.wide{width:min(580px,100%)}
+.box select{width:100%;padding:11px 14px;border:2px solid #dfe8e2;border-radius:12px;font-family:inherit;font-size:.95rem;background:#fff}
+.box select:focus{outline:0;border-color:var(--orange)}
+.pkrow{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:6px 0 4px}
+.pkopt{position:relative;border:2px solid #dfe8e2;border-radius:14px;padding:12px 6px;text-align:center;cursor:pointer;margin:0!important;transition:.25s}
+.pkopt input{position:absolute;opacity:0;pointer-events:none}
+.pkopt span{display:block;font-weight:600;color:var(--green-dark);font-size:.88rem}
+.pkopt em{display:block;font-style:normal;color:var(--orange);font-weight:700;font-size:1.05rem}
+.pkopt.sel{border-color:var(--orange);background:var(--orange-soft)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.sum{background:var(--green-soft);border-radius:12px;padding:12px 16px;margin-top:14px;font-size:.9rem;color:var(--green-dark)}
+.box label.chk{display:flex;gap:10px;align-items:flex-start;font-weight:400;font-size:.82rem;color:var(--muted);margin-top:14px}
+.box input[type=checkbox]{width:auto;margin-top:3px;accent-color:var(--orange)}
+.done-ic{font-size:3rem;text-align:center}
+
+/* ADMIN: BOOKINGS */
+.admin-only{display:none}
+.admin .admin-only{display:block}
+.bookings{background:var(--off)}
+.bk-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+.bk{background:#fff;border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);border-left:6px solid var(--orange);font-size:.9rem}
+.bk.done{border-left-color:#bbb;opacity:.65}
+.bk p{margin:4px 0;color:var(--muted)}
+.bk a{color:var(--green);font-weight:600}
+.bk-top{display:flex;justify-content:space-between;align-items:center;font-size:1.05rem;color:var(--green-dark);margin-bottom:6px}
+.bk .tag{background:var(--orange-soft);color:var(--orange);font-size:.72rem;font-weight:700;padding:3px 12px;border-radius:30px}
+.bk.done .tag{background:#eee;color:#888}
+.bk .msg{font-style:italic}
+.bk .tools{display:flex;gap:8px;margin-top:12px}
+.bk-empty,.bk-note{color:var(--muted);font-size:.88rem}
+.bk-note{margin-top:22px}
+@media(max-width:900px){.evinfo{grid-template-columns:1fr}}
+@media(max-width:520px){.g2{grid-template-columns:1fr}.pkopt span{font-size:.78rem}}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(30px);transition:.8s}
+.rv.in{opacity:1;transform:none}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero-grid,.about-grid,.hours-grid,.zones{grid-template-columns:1fr}
+  .gallery{grid-template-columns:repeat(2,1fr)}
+  .gallery figure:nth-child(1){grid-column:span 2;grid-row:span 1}
+  .burger{display:block}
+  nav ul{position:absolute;top:70px;left:0;right:0;background:#fff;flex-direction:column;padding:20px 6%;gap:16px;display:none;box-shadow:0 12px 20px rgba(0,0,0,.08)}
+  nav ul.open{display:flex}
+  section{padding:70px 0}
+  .badge{left:10px}
+  .board{padding:36px 16px;border-width:10px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a href="#top" class="logo" aria-label="ÉDEN Work">
+      <span class="logo-box"><img src="images/logo.png" alt="ÉDEN Work" onerror="this.closest('.logo').classList.add('nologo')"></span>
+      <span class="logo-text">ÉDEN<span>WORK</span></span>
+    </a>
+    <nav>
+      <ul id="menu">
+        <li><a href="#about">About</a></li>
+        <li><a href="#amenities">Services</a></li>
+        <li><a href="#space">The Space</a></li>
+        <li><a href="#desks">Desks</a></li>
+        <li><a href="#news">News</a></li>
+        <li><a href="#rules">Rules</a></li>
+        <li><a href="#hours">Hours</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#events" class="navbook">Book an event</a></li>
+      </ul>
+    </nav>
+    <button class="burger" id="burger" aria-label="Menu">☰</button>
+  </div>
+</header>
+
+<main id="top">
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="status"><span class="dot" id="dot"></span><span id="statusTxt">Checking…</span></div>
+      <h1><span data-edit="heroTitle">Welcome to <em>ÉDEN</em> Work</span></h1>
+      <div class="slogan" data-edit="slogan">Tranquil Haven for Creative Minds</div>
+      <p class="txt" data-edit="heroText">A calm, bright and quiet co-working space made for students and freelancers who need a peaceful place to study or work remotely.</p>
+      <div class="hero-cta">
+        <a href="#desks" class="btn btn-orange">Discover our desks</a>
+        <button type="button" class="btn btn-ghost" data-book="">Book an event</button>
+      </div>
+    </div>
+    <div class="hero-img">
+      <img src="images/eden-1.jpg" alt="ÉDEN Work main hall" data-img="hero" onerror="this.style.background='#cfe6d8';this.style.minHeight='320px'">
+      <div class="badge"><b>16</b>desks</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container about-grid">
+    <div class="rv">
+      <span class="eyebrow">About us</span>
+      <h2 data-edit="aboutTitle">A quiet place to focus</h2>
+      <p class="lead" data-edit="aboutText" style="margin-bottom:0">ÉDEN Work is designed for <b class="hl">students and freelancers</b> looking for a quiet place to study or work remotely. Bright rooms, green plants, warm lights and a respectful atmosphere help you concentrate and create. Come in, plug in, and let your ideas grow.</p>
+    </div>
+    <div class="stats rv">
+      <div class="stat"><b>16</b><span>Desks</span></div>
+      <div class="stat"><b>7/7</b><span>Days a week</span></div>
+      <div class="stat"><b>5G</b><span>Fast WiFi</span></div>
+      <div class="stat"><b>10</b><span>People in meeting room</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- AMENITIES -->
+<section class="amen" id="amenities">
+  <div class="container">
+    <span class="eyebrow">Services</span>
+    <h2>Everything you need</h2>
+    <p class="lead">Simple comforts so you can focus on what matters.</p>
+    <div class="cards">
+      <div class="card rv"><div class="ic"></div><h3>5G WiFi</h3><p>Fast and stable connection for calls, uploads and research.</p></div>
+      <div class="card rv"><div class="ic"></div><h3>Air conditioning</h3><p>Cool in summer, comfortable all year long.</p></div>
+      <div class="card rv"><div class="ic"></div><h3>Coffee &amp; drinks</h3><p>Fresh coffee served at your table by our assistant.</p></div>
+      <div class="card rv"><div class="ic"></div><h3>Printer &amp; copy</h3><p>Print or photocopy your documents on site.</p></div>
+      <div class="card rv"><div class="ic"></div><h3>Silent atmosphere</h3><p>A respectful environment, made for deep work.</p></div>
+      <div class="card rv"><div class="ic"></div><h3>Green terrace</h3><p>Fresh air, bean bags and a place for personal calls.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="space">
+  <div class="container">
+    <span class="eyebrow">The space</span>
+    <h2>Take a look inside</h2>
+    <p class="lead">Natural light by day, warm lanterns by night.</p>
+    <div class="gallery rv">
+      <figure><img src="images/eden-1.jpg" alt="Main hall" data-img="g1" loading="lazy"><figcaption>Main hall</figcaption></figure>
+      <figure><img src="images/eden-2.jpg" alt="Evening ambiance" data-img="g2" loading="lazy"><figcaption>Evening vibes</figcaption></figure>
+      <figure><img src="images/eden-3.jpg" alt="Meeting room" data-img="g3" loading="lazy"><figcaption>Meeting room</figcaption></figure>
+      <figure style="grid-column:span 2"><img src="images/eden-4.jpg" alt="Terrace" data-img="g4" loading="lazy"><figcaption>Terrace</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- DESKS -->
+<section class="desks" id="desks">
+  <div class="container">
+    <span class="eyebrow">Our desks</span>
+    <h2>16 desks, one for every need</h2>
+    <p class="lead">Choose the spot that fits the way you work.</p>
+    <div class="legend">
+      <span><i style="background:var(--green)"></i>Individual (1 person)</span>
+      <span><i style="background:#3aa0d8"></i>Shared (2 to 4)</span>
+      <span><i style="background:var(--orange)"></i>Meeting room</span>
+      <span><i style="background:#e7c43a"></i>Terrace (2 people)</span>
+    </div>
+    <div class="zones">
+      <div class="zone rv">
+        <h3>Main hall · 12 desks</h3>
+        <div class="desk-grid" id="hallDesks"></div>
+      </div>
+      <div class="zones-right">
+        <div class="zone rv">
+          <h3>Meeting room · up to 10 people</h3>
+          <div class="desk-grid" id="meetDesks"></div>
+          <p class="meet-note">Desks 11 &amp; 12 are joined together in a private glass meeting room with a TV screen and a flipchart.</p>
+        </div>
+        <div class="zone rv">
+          <h3>Terrace · 2 desks</h3>
+          <div class="desk-grid" id="terrDesks"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section class="news-wrap" id="news">
+  <div class="container">
+    <span class="eyebrow">Community</span>
+    <h2>The news board</h2>
+    <p class="lead">Updates, events and announcements for our community.</p>
+    <div class="board rv"><div class="notes" id="notes"></div></div>
+    <button class="btn btn-orange add-news" id="addNews">＋ Add news</button>
+  </div>
+</section>
+
+<!-- RULES -->
+<section class="rules" id="rules">
+  <div class="container">
+    <span class="eyebrow">Policy</span>
+    <h2>House rules</h2>
+    <p class="lead">Simple rules so everyone can enjoy a peaceful space.</p>
+    <div class="rules-grid">
+      <div class="rule key rv"><div class="ic">🚭</div><div><h3>No smoking or vaping inside</h3><p>Smoking and vaping are allowed <span class="hl">only outside, on the terrace</span>.</p></div></div>
+      <div class="rule key rv"><div class="ic">🎧</div><div><h3>Professional calls only</h3><p>Personal phone calls are not allowed inside. Professional calls only, and <span class="hl">headphones are required</span>.</p></div></div>
+      <div class="rule rv"><div class="ic">📞</div><div><h3>Personal calls on the terrace</h3><p>Need to chat with family or friends? Step out to the terrace.</p></div></div>
+      <div class="rule rv"><div class="ic">🔔</div><div><h3>Self-service</h3><p>Our assistant prepares your order. When you hear the <span class="hl">bell</span>, pick it up at reception.</p></div></div>
+      <div class="rule key rv"><div class="ic">💳</div><div><h3>Payment before entry</h3><p>Please pay at reception <span class="hl">before</span> taking your seat.</p></div></div>
+      <div class="rule rv"><div class="ic">🤫</div><div><h3>Keep it quiet</h3><p>Speak softly and respect others so nobody is bothered.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section class="events" id="events">
+  <div class="container">
+    <span class="eyebrow">Events</span>
+    <h2 data-edit="evTitle">Book ÉDEN Work for your event</h2>
+    <p class="lead" data-edit="evLead">Workshops, trainings, meetings, birthdays or shootings. Choose a package, fill in the form, and our team will contact you to confirm.</p>
+
+    <div class="prices">
+      <div class="price rv">
+        <div class="dur">3 hours</div>
+        <div class="amt"><b data-edit="evP3" data-price="3">149</b> DT</div>
+        <small>Payment at reception</small>
+        <button type="button" class="btn btn-ghost" data-book="3">Book 3 hours</button>
+      </div>
+      <div class="price rv">
+        <div class="dur">4 hours</div>
+        <div class="amt"><b data-edit="evP4" data-price="4">189</b> DT</div>
+        <small>Payment at reception</small>
+        <button type="button" class="btn btn-ghost" data-book="4">Book 4 hours</button>
+      </div>
+      <div class="price best rv">
+        <div class="dur">6 hours</div>
+        <div class="amt"><b data-edit="evP6" data-price="6">269</b> DT</div>
+        <small>Payment at reception</small>
+        <button type="button" class="btn btn-orange" data-book="6">Book 6 hours</button>
+      </div>
+    </div>
+
+    <div class="evinfo">
+      <div class="infobox rv">
+        <h3>What you need to know</h3>
+        <ul>
+          <li data-edit="evI1">⏱️ Choose a 3, 4 or 6 hour package. Your time starts at the start time you choose.</li>
+          <li data-edit="evI2">💳 <b class="hl">Payment is made at reception before the event starts.</b></li>
+          <li data-edit="evI3">❄️ Available on site: air conditioning, 5G WiFi, tables and chairs, a TV screen and flipchart in the meeting room, coffee and a printer.</li>
+          <li data-edit="evI4">🚭 House rules apply: no smoking or vaping inside (the terrace is allowed), and please keep the noise low.</li>
+          <li data-edit="evI5">📩 Your request is <b class="hl">not final</b> until our team confirms it by phone or email.</li>
+          <li data-edit="evI6">📝 We only need your name, phone number, email, and the date and time you want.</li>
+        </ul>
+      </div>
+      <div class="infobox cta rv">
+        <h3>Ready to plan it?</h3>
+        <p>It takes less than a minute.</p>
+        <button type="button" class="btn btn-orange" data-book="">Book your event</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOURS + MASCOT -->
+<section id="hours">
+  <div class="container hours-grid">
+    <div class="rv">
+      <span class="eyebrow">Opening hours</span>
+      <h2>Open 7 days a week</h2>
+      <div class="hours">
+        <div class="row"><span>Monday – Friday</span>
+          <span class="view"><b id="wdView">09:00 – 21:00</b></span>
+          <span><input type="time" id="wdOpen"> <input type="time" id="wdClose"></span></div>
+        <div class="row"><span>Saturday – Sunday</span>
+          <span class="view"><b id="weView">09:00 – 19:00</b></span>
+          <span><input type="time" id="weOpen"> <input type="time" id="weClose"></span></div>
+      </div>
+    </div>
+    <div class="mascot rv">
+      <!-- Mascot: red fox with a white and green tie -->
+      <svg viewBox="0 0 200 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ÉDEN fox mascot">
+        <path d="M22 18 L78 62 L30 98Z" fill="#e4642a"/><path d="M38 40 L66 62 L40 80Z" fill="#fff"/>
+        <path d="M178 18 L122 62 L170 98Z" fill="#e4642a"/><path d="M162 40 L134 62 L160 80Z" fill="#fff"/>
+        <path d="M45 228 Q48 178 100 172 Q152 178 155 228Z" fill="#d9531e"/>
+        <path d="M80 174 L100 228 L120 174Z" fill="#fff"/>
+        <path d="M28 85 Q100 20 172 85 Q176 135 100 172 Q24 135 28 85Z" fill="#e4642a"/>
+        <path d="M28 100 Q72 108 100 172 Q38 142 28 100Z" fill="#fff"/>
+        <path d="M172 100 Q128 108 100 172 Q162 142 172 100Z" fill="#fff"/>
+        <ellipse cx="72" cy="100" rx="7" ry="8" fill="#1d2b24"/><circle cx="74" cy="97" r="2.5" fill="#fff"/>
+        <ellipse cx="128" cy="100" rx="7" ry="8" fill="#1d2b24"/><circle cx="130" cy="97" r="2.5" fill="#fff"/>
+        <ellipse cx="100" cy="148" rx="10" ry="7" fill="#1d2b24"/>
+        <path d="M86 158 Q100 170 114 158" stroke="#1d2b24" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M91 180 L109 180 L104 193 L96 193Z" fill="#2f7d4f"/>
+        <path d="M96 193 L104 193 L111 222 L100 228 L89 222Z" fill="#2f7d4f"/>
+        <path d="M95 202 L106 208 M93 212 L108 218" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <p>Our mascot ✨</p>
+    </div>
+  </div>
+</section>
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container">
+    <span class="eyebrow">Contact</span>
+    <h2 data-edit="ctTitle">Come and say hello</h2>
+    <p class="lead" data-edit="ctLead">Questions, bookings or just a visit? Reach us the way you prefer.</p>
+    <p>Email :</p>
+     <p>info.eden.work@gmail.com</p>
+     <p>phone number/ whatsapp :</p>
+     <p>+216 55 394 074</p>
+     <p>instagram :</p> <a href="https://www.instagram.com/eden__work?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw==">@eden__work </a>
+     <p>Facbook :</p>
+     <a href="https://www.facebook.com/3denwork/">@3denwork</a>
+     <p>location :</p>
+     <a href="https://maps.app.goo.gl/zfbEumKVCBMpNeaG8">eden work</a>
+    <div class="ct-grid" id="ctGrid"></div>
+    <button type="button" class="btn btn-orange admin-only" id="editContact">✏️ Edit contact info</button>
+  </div>
+</section>
+
+<!-- ADMIN ONLY: BOOKINGS INBOX -->
+<section class="admin-only bookings" id="bookings">
+  <div class="container">
+    <span class="eyebrow">Admin only</span>
+    <h2>Event booking requests</h2>
+    <p class="lead">Every request from the booking form appears here. Only you can see this section.</p>
+    <div class="bk-list" id="bkList"></div>
+    <p class="bk-note">Tip: to also receive each request by email (from any visitor's device), paste your Formspree link in the script at <b>BOOKING_ENDPOINT</b>.</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="logo" aria-label="ÉDEN Work">
+      <span class="logo-box"><img src="images/logo.png" alt="ÉDEN Work" onerror="this.closest('.logo').classList.add('nologo')"></span>
+      <span class="logo-text">ÉDEN<span>WORK</span></span>
+    </div>
+    <div class="sl" data-edit="footSlogan">Tranquil Haven for Creative Minds</div>
+    <div class="ft-links" id="ftLinks"></div>
+    <small>© <span id="yr"></span> ÉDEN Work · All rights reserved</small>
+    <button class="lock" id="lockBtn" title="Admin">●</button>
+  </div>
+</footer>
+
+<!-- ADMIN BAR -->
+<div class="adminbar">
+  <span>🔧 Admin mode: click any text to edit, click any photo to replace</span>
+  <button class="o" id="barAdd">＋ News</button>
+  <button class="o" id="barBk">📩 Bookings (<span id="bkCount">0</span>)</button>
+  <button class="o" id="barCt">📞 Contact</button>
+  <button class="g" id="barReset">Reset</button>
+  <button class="g" id="barExit">Log out</button>
+</div>
+
+<!-- LOGIN MODAL -->
+<div class="modal" id="loginModal">
+  <form class="box" id="loginForm">
+    <h3>🔒 Admin access</h3>
+    <label for="pw">Password</label>
+    <input type="password" id="pw" autocomplete="off" inputmode="numeric">
+    <div class="err" id="loginErr"></div>
+    <div class="acts">
+      <button type="button" class="btn btn-ghost" data-close>Cancel</button>
+      <button class="btn btn-orange">Enter</button>
+    </div>
+  </form>
+</div>
+
+<!-- NEWS MODAL -->
+<div class="modal" id="newsModal">
+  <form class="box" id="newsForm">
+    <h3 id="newsHead">Add news</h3>
+    <label>Title</label><input id="nTitle" required maxlength="60">
+    <label>Message</label><textarea id="nText" rows="4" required maxlength="300"></textarea>
+    <label>Picture (optional)</label><input type="file" id="nImg" accept="image/*">
+    <img class="prev" id="nPrev" hidden alt="">
+    <div class="err" id="newsErr"></div>
+    <div class="acts">
+      <button type="button" class="btn btn-ghost" data-close>Cancel</button>
+      <button class="btn btn-orange">Publish</button>
+    </div>
+  </form>
+</div>
+
+<!-- BOOKING MODAL -->
+<div class="modal" id="bookModal">
+  <div class="box wide">
+    <form id="bookForm" novalidate>
+      <h3>🎉 Book an event</h3>
+      <label>Choose your package</label>
+      <div class="pkrow">
+        <label class="pkopt" data-h="3"><input type="radio" name="bkPk" value="3" checked><span>3 hours</span><em></em></label>
+        <label class="pkopt" data-h="4"><input type="radio" name="bkPk" value="4"><span>4 hours</span><em></em></label>
+        <label class="pkopt" data-h="6"><input type="radio" name="bkPk" value="6"><span>6 hours</span><em></em></label>
+      </div>
+      <div class="g2">
+        <div><label for="bkName">Full name *</label><input id="bkName" autocomplete="name" maxlength="60"></div>
+        <div><label for="bkPhone">Phone number *</label><input id="bkPhone" type="tel" autocomplete="tel" maxlength="20" placeholder="+216 ..."></div>
+      </div>
+      <label for="bkEmail">Email *</label><input id="bkEmail" type="email" autocomplete="email" maxlength="80">
+      <div class="g2">
+        <div><label for="bkType">Type of event</label>
+          <select id="bkType">
+            <option>Workshop / Training</option><option>Meeting</option><option>Birthday / Celebration</option>
+            <option>Photo / Video shoot</option><option>Study group</option><option>Other</option>
+          </select></div>
+        <div><label for="bkGuests">Number of guests *</label><input id="bkGuests" type="number" min="1" max="200" value="5"></div>
+      </div>
+      <div class="g2">
+        <div><label for="bkDate">Date *</label><input id="bkDate" type="date"></div>
+        <div><label for="bkStart">Start time *</label><input id="bkStart" type="time" value="10:00"></div>
+      </div>
+      <div class="sum" id="bkSum"></div>
+      <label for="bkMsg">Message (optional)</label><textarea id="bkMsg" rows="3" maxlength="400" placeholder="Tell us more about your event…"></textarea>
+      <label class="chk"><input type="checkbox" id="bkRules"><span>I have read the house rules, and I understand that payment is made at reception and that my request must be confirmed by the team.</span></label>
+      <div class="err" id="bkErr"></div>
+      <div class="acts">
+        <button type="button" class="btn btn-ghost" data-close>Cancel</button>
+        <button class="btn btn-orange" id="bkSubmit">Send request</button>
+      </div>
+    </form>
+    <div id="bookDone" hidden>
+      <div class="done-ic">✅</div>
+      <h3 style="text-align:center">Request sent!</h3>
+      <p style="text-align:center;color:var(--muted);font-size:.92rem">Thank you <b id="doneName"></b>. We received your request for <b id="doneWhen"></b>. Our team will contact you by phone or email to confirm. Payment is made at reception before the event.</p>
+      <div class="acts" style="justify-content:center"><button type="button" class="btn btn-orange" data-close>Close</button></div>
+    </div>
+  </div>
+</div>
+
+<input type="file" id="imgPicker" accept="image/*" hidden>
+
+<script>
+(function(){
+  const PASSWORD = "2424";             // change the password here
+  // To receive every booking by email from ANY visitor: create a free form at formspree.io
+  // and paste its link here, e.g. "https://formspree.io/f/abcdwxyz". Leave "" to keep bookings in this browser only.
+  const BOOKING_ENDPOINT = "";
+  const KEY = "eden_site_v1";
+  const $ = (s,r=document)=>r.querySelector(s);
+  const $$ = (s,r=document)=>[...r.querySelectorAll(s)];
+
+  /* ---------- DATA ---------- */
+  const defaults = {
+    texts:{}, images:{},
+    hours:{wd:["09:00","21:00"], we:["09:00","19:00"]},
+    news:[
+      {id:1,title:"Welcome to ÉDEN Work!",text:"Our doors are open 7 days a week. Come and find your quiet corner.",date:new Date().toISOString().slice(0,10),img:""},
+      {id:2,title:"Reminder",text:"Headphones for professional calls, and personal calls on the terrace please.",date:new Date().toISOString().slice(0,10),img:""}
+    ]
+  };
+  let data;
+  try{ data = JSON.parse(localStorage.getItem(KEY)) || structuredClone(defaults); }catch(e){ data = structuredClone(defaults); }
+  function save(){
+    try{ localStorage.setItem(KEY, JSON.stringify(data)); }
+    catch(e){ alert("Storage is full. Try a smaller picture or delete old news."); }
+  }
+
+  /* ---------- DESKS ---------- */
+  const hall=[1,2,3,4,5,6,7,8,9,10,13,14];
+  const mk=(n)=>{
+    let cls="",txt="1 person";
+    if(n===9||n===10){cls="shared";txt="2 – 4 people"}
+    if(n===11||n===12){cls="meet";txt="Meeting room"}
+    if(n===15||n===16){cls="terr";txt="2 people"}
+    return `<div class="desk ${cls}"><b>${n}</b><small>${txt}</small></div>`;
+  };
+  $("#hallDesks").innerHTML = hall.map(mk).join("");
+  $("#meetDesks").innerHTML = [11,12].map(mk).join("");
+  $("#terrDesks").innerHTML = [15,16].map(mk).join("");
+
+  /* ---------- APPLY SAVED CONTENT ---------- */
+  $$("[data-edit]").forEach(el=>{
+    const k=el.dataset.edit;
+    if(data.texts[k]) el.innerHTML = data.texts[k];
+    el.addEventListener("blur",()=>{ if(!document.body.classList.contains("admin"))return; data.texts[k]=el.innerHTML; save(); });
+  });
+  $$("[data-img]").forEach(img=>{
+    const k=img.dataset.img;
+    if(data.images[k]) img.src = data.images[k];
+  });
+
+  /* ---------- HOURS ---------- */
+  function renderHours(){
+    const [wo,wc]=data.hours.wd,[eo,ec]=data.hours.we;
+    $("#wdView").textContent=`${wo} – ${wc}`; $("#weView").textContent=`${eo} – ${ec}`;
+    $("#wdOpen").value=wo;$("#wdClose").value=wc;$("#weOpen").value=eo;$("#weClose").value=ec;
+    updateStatus();
+  }
+  [["#wdOpen","wd",0],["#wdClose","wd",1],["#weOpen","we",0],["#weClose","we",1]].forEach(([s,g,i])=>{
+    $(s).addEventListener("change",e=>{ data.hours[g][i]=e.target.value; save(); renderHours(); });
+  });
+  function updateStatus(){
+    const now=new Date(), d=now.getDay(), wk=(d>=1&&d<=5);
+    const [o,c]=wk?data.hours.wd:data.hours.we;
+    const m=now.getHours()*60+now.getMinutes();
+    const t=s=>{const [h,mi]=s.split(":").map(Number);return h*60+mi};
+    const open=m>=t(o)&&m<t(c);
+    $("#dot").className="dot "+(open?"on":"off");
+    $("#statusTxt").textContent = open ? `Open now · until ${c}` : `Closed now · opens at ${o}`;
+  }
+  setInterval(updateStatus,60000);
+
+  /* ---------- NEWS ---------- */
+  const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  function fmt(d){ try{return new Date(d).toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"})}catch(e){return d} }
+  function renderNews(){
+    const box=$("#notes");
+    if(!data.news.length){ box.innerHTML='<div class="empty" style="grid-column:1/-1">No news yet… stay tuned! 🌿</div>'; return; }
+    box.innerHTML = [...data.news].reverse().map(n=>`
+      <article class="note">
+        ${n.img?`<img src="${n.img}" alt="">`:""}
+        <h3>${esc(n.title)}</h3>
+        <p>${esc(n.text)}</p>
+        <time>${fmt(n.date)}</time>
+        <div class="tools"><button class="e" data-e="${n.id}">Edit</button><button class="d" data-d="${n.id}">Delete</button></div>
+      </article>`).join("");
+  }
+  $("#notes").addEventListener("click",e=>{
+    const d=e.target.dataset.d, ed=e.target.dataset.e;
+    if(d && confirm("Delete this news?")){ data.news=data.news.filter(n=>n.id!=d); save(); renderNews(); }
+    if(ed){ openNews(data.news.find(n=>n.id==ed)); }
+  });
+
+  /* resize pictures so they fit in the browser storage */
+  function shrink(file,max=1000){
+    return new Promise((res,rej)=>{
+      const r=new FileReader();
+      r.onerror=rej;
+      r.onload=()=>{
+        const im=new Image();
+        im.onload=()=>{
+          const s=Math.min(1,max/Math.max(im.width,im.height));
+          const c=document.createElement("canvas");
+          c.width=im.width*s;c.height=im.height*s;
+          c.getContext("2d").drawImage(im,0,0,c.width,c.height);
+          res(c.toDataURL("image/jpeg",.78));
+        };
+        im.onerror=rej; im.src=r.result;
+      };
+      r.readAsDataURL(file);
+    });
+  }
+
+  let editing=null, newImg="";
+  function openNews(n){
+    editing=n||null; newImg=n?n.img:"";
+    $("#newsHead").textContent=n?"Edit news":"Add news";
+    $("#nTitle").value=n?n.title:""; $("#nText").value=n?n.text:""; $("#nImg").value="";
+    $("#nPrev").hidden=!newImg; $("#nPrev").src=newImg||"";
+    $("#newsErr").textContent="";
+    $("#newsModal").classList.add("show");
+  }
+  $("#nImg").addEventListener("change",async e=>{
+    const f=e.target.files[0]; if(!f)return;
+    newImg=await shrink(f,900); $("#nPrev").src=newImg; $("#nPrev").hidden=false;
+  });
+  $("#newsForm").addEventListener("submit",e=>{
+    e.preventDefault();
+    const t=$("#nTitle").value.trim(), x=$("#nText").value.trim();
+    if(!t||!x)return;
+    if(editing){ Object.assign(editing,{title:t,text:x,img:newImg}); }
+    else data.news.push({id:Date.now(),title:t,text:x,img:newImg,date:new Date().toISOString().slice(0,10)});
+    save(); renderNews(); closeModals();
+  });
+  $("#addNews").onclick=()=>openNews();
+  $("#barAdd").onclick=()=>openNews();
+
+  /* ---------- IMAGE REPLACE (admin) ---------- */
+  let targetImg=null;
+  $$("[data-img]").forEach(img=>img.addEventListener("click",()=>{
+    if(!document.body.classList.contains("admin"))return;
+    targetImg=img; $("#imgPicker").click();
+  }));
+  $("#imgPicker").addEventListener("change",async e=>{
+    const f=e.target.files[0]; if(!f||!targetImg)return;
+    const url=await shrink(f,1400);
+    targetImg.src=url; data.images[targetImg.dataset.img]=url;
+    // keep hero + first gallery picture in sync only if you want: they are separate keys
+    save(); e.target.value="";
+  });
+
+  /* ---------- ADMIN MODE ---------- */
+  function setAdmin(on){
+    document.body.classList.toggle("admin",on);
+    $$("[data-edit]").forEach(el=>el.contentEditable=on?"true":"false");
+    if(on) sessionStorage.setItem("eden_admin","1"); else sessionStorage.removeItem("eden_admin");
+  }
+  function closeModals(){ $$(".modal").forEach(m=>m.classList.remove("show")); }
+  $$("[data-close]").forEach(b=>b.onclick=closeModals);
+  $$(".modal").forEach(m=>m.addEventListener("click",e=>{ if(e.target===m)closeModals(); }));
+
+  $("#lockBtn").onclick=()=>{
+    if(document.body.classList.contains("admin")) return;
+    $("#pw").value=""; $("#loginErr").textContent="";
+    $("#loginModal").classList.add("show"); setTimeout(()=>$("#pw").focus(),50);
+  };
+  $("#loginForm").addEventListener("submit",e=>{
+    e.preventDefault();
+    if($("#pw").value===PASSWORD){ setAdmin(true); closeModals(); }
+    else $("#loginErr").textContent="Wrong password. Try again.";
+  });
+  $("#barExit").onclick=()=>setAdmin(false);
+  $("#barReset").onclick=()=>{
+    if(confirm("Reset everything to the original content?")){ localStorage.removeItem(KEY); location.reload(); }
+  };
+  if(sessionStorage.getItem("eden_admin")) setAdmin(true);
+
+  /* ---------- UI ---------- */
+  $("#burger").onclick=()=>$("#menu").classList.toggle("open");
+  $$("#menu a").forEach(a=>a.onclick=()=>$("#menu").classList.remove("open"));
+  $("#yr").textContent=new Date().getFullYear();
+  const io=new IntersectionObserver(es=>es.forEach(x=>{ if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target)} }),{threshold:.12});
+  $$(".rv").forEach(el=>io.observe(el));
+
+  /* ---------- EVENT BOOKINGS ---------- */
+  const BKEY="eden_bookings_v1";
+  let bookings=[];
+  try{ bookings=JSON.parse(localStorage.getItem(BKEY))||[]; }catch(e){ bookings=[]; }
+  const saveBk=()=>{ try{ localStorage.setItem(BKEY,JSON.stringify(bookings)); }catch(e){} };
+  const E=v=>esc(String(v==null?"":v));
+  const priceOf=h=>parseInt(($(`[data-price="${h}"]`).textContent||"").replace(/\D/g,""),10)||0;
+  const today=()=>{ const d=new Date(); d.setMinutes(d.getMinutes()-d.getTimezoneOffset()); return d.toISOString().slice(0,10); };
+  function addH(t,h){
+    const [a,b]=t.split(":").map(Number), m=(a*60+b+h*60)%1440;
+    return String(Math.floor(m/60)).padStart(2,"0")+":"+String(m%60).padStart(2,"0");
+  }
+  function refreshBk(){
+    const h=$('input[name=bkPk]:checked').value;
+    $$(".pkopt").forEach(l=>{
+      l.querySelector("em").textContent=priceOf(l.dataset.h)+" DT";
+      l.classList.toggle("sel",l.querySelector("input").checked);
+    });
+    const d=$("#bkDate").value, s=$("#bkStart").value;
+    $("#bkSum").innerHTML = (d&&s)
+      ? `📅 <b>${fmt(d)}</b> · ${s} → ${addH(s,+h)} · Total: <b class="hl">${priceOf(h)} DT</b>`
+      : `Total: <b class="hl">${priceOf(h)} DT</b> for ${h} hours`;
+  }
+  function openBook(h){
+    $("#bookForm").hidden=false; $("#bookDone").hidden=true; $("#bkErr").textContent="";
+    $("#bkSubmit").disabled=false;
+    $("#bkDate").min=today();
+    if(h) $(`input[name=bkPk][value="${h}"]`).checked=true;
+    refreshBk();
+    $("#bookModal").classList.add("show");
+  }
+  $$("[data-book]").forEach(b=>b.addEventListener("click",()=>openBook(b.dataset.book)));
+  ["input","change"].forEach(ev=>$("#bookForm").addEventListener(ev,refreshBk));
+
+  $("#bookForm").addEventListener("submit",async e=>{
+    e.preventDefault();
+    const err=$("#bkErr"); err.textContent="";
+    const f={
+      name:$("#bkName").value.trim(), phone:$("#bkPhone").value.trim(), email:$("#bkEmail").value.trim(),
+      type:$("#bkType").value, guests:$("#bkGuests").value, date:$("#bkDate").value, start:$("#bkStart").value,
+      hours:$('input[name=bkPk]:checked').value, message:$("#bkMsg").value.trim()
+    };
+    if(f.name.length<2){ err.textContent="Please enter your full name."; return; }
+    if(!/^[+\d][\d\s().-]{6,}$/.test(f.phone)){ err.textContent="Please enter a valid phone number."; return; }
+    if(!/^\S+@\S+\.\S+$/.test(f.email)){ err.textContent="Please enter a valid email address."; return; }
+    if(!f.date||!f.start){ err.textContent="Please choose a date and a start time."; return; }
+    if(f.date<today()){ err.textContent="The date cannot be in the past."; return; }
+    if(!(+f.guests>=1)){ err.textContent="Please enter the number of guests."; return; }
+    if(!$("#bkRules").checked){ err.textContent="Please accept the house rules to continue."; return; }
+    f.end=addH(f.start,+f.hours); f.price=priceOf(f.hours)+" DT";
+
+    const btn=$("#bkSubmit"); btn.disabled=true;
+    if(BOOKING_ENDPOINT){
+      try{
+        const r=await fetch(BOOKING_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},
+          body:JSON.stringify({...f,_subject:"New event booking – ÉDEN Work"})});
+        if(!r.ok) throw new Error("bad");
+      }catch(x){ err.textContent="Sorry, we could not send your request. Please try again."; btn.disabled=false; return; }
+    }
+    bookings.push({id:Date.now(),created:new Date().toISOString(),done:false,...f});
+    saveBk(); renderBookings();
+    $("#doneName").textContent=f.name;
+    $("#doneWhen").textContent=`${fmt(f.date)}, ${f.start} → ${f.end}`;
+    $("#bookForm").hidden=true; $("#bookDone").hidden=false;
+    $("#bookForm").reset(); $("#bkGuests").value=5; $("#bkStart").value="10:00";
+  });
+
+  function renderBookings(){
+    $("#bkCount").textContent=bookings.filter(b=>!b.done).length;
+    const box=$("#bkList");
+    if(!bookings.length){ box.innerHTML='<p class="bk-empty">No booking requests yet.</p>'; return; }
+    box.innerHTML=[...bookings].reverse().map(b=>`
+      <article class="bk ${b.done?"done":""}">
+        <div class="bk-top"><b>${E(b.name)}</b><span class="tag">${b.done?"Done":"New"}</span></div>
+        <p>📅 ${E(fmt(b.date))} · ${E(b.start)} → ${E(b.end)} (${E(b.hours)}h) · <b class="hl">${E(b.price)}</b></p>
+        <p>🎉 ${E(b.type)} · 👥 ${E(b.guests)} guests</p>
+        <p>📞 <a href="tel:${E(b.phone)}">${E(b.phone)}</a></p>
+        <p>✉️ <a href="mailto:${E(b.email)}">${E(b.email)}</a></p>
+        ${b.message?`<p class="msg">“${E(b.message)}”</p>`:""}
+        <div class="tools"><button class="e" data-done="${b.id}">${b.done?"Mark as new":"Mark as done"}</button><button class="d" data-del="${b.id}">Delete</button></div>
+      </article>`).join("");
+  }
+  $("#bkList").addEventListener("click",e=>{
+    const dn=e.target.dataset.done, dl=e.target.dataset.del;
+    if(dn){ const b=bookings.find(x=>x.id==dn); if(b){ b.done=!b.done; saveBk(); renderBookings(); } }
+    if(dl && confirm("Delete this booking request?")){ bookings=bookings.filter(x=>x.id!=dl); saveBk(); renderBookings(); }
+  });
+  $("#barBk").onclick=()=>$("#bookings").scrollIntoView({behavior:"smooth"});
+
+  renderHours(); renderNews(); renderBookings();
+})();
+</script>
+</body>
+</html>
